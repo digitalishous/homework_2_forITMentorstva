@@ -1,0 +1,239 @@
+html
+{
+    box-sizing: border-box;
+    font-size: 100%;
+}
+
+*, *::before, *::after{
+    box-sizing: inherit;
+}
+
+body{
+    min-height: 100vh;
+    margin: 0;
+    margin-top: 2rem;
+    padding: 0;
+    line-height: 1.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: url(assets/img/eye-cursor.svg) 20 20, auto;
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 2rem;
+}
+
+h1{
+    margin-bottom: 0;
+    font-size: clamp(1.4rem, 6vw, 2.8rem);
+    letter-spacing: 0.5rem;
+    font-weight: 600;
+}
+
+h2{
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    letter-spacing: 0.3rem;
+    font-weight: 400;
+}
+
+h1, h2{
+    text-transform: uppercase;
+}
+
+
+.img-wrapper{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    max-width: 90%;
+    margin: 2rem auto;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.cloud-container{
+    position: absolute;
+    width: 40%;
+    left: 20%;
+    top: -22%;
+
+    opacity: 0;
+    transform: scale(0.8);
+    animation: cloudAppear 1.2s ease forwards;
+    animation-delay: 0.8s;
+}
+
+@keyframes cloudAppear{
+    to{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.cloud-container img{
+    width: 100%;
+    display: block; 
+}
+
+.cloud-container img.cloud{
+    width: 80%;          /* cloud scales with container */
+    display: block;
+}
+
+.girl{
+    width: 60%;
+    display: block;
+}
+
+#textContainer{
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    transform: translateX(-50%);
+    font-family: "Caveat", cursive;
+    font-size: clamp(1rem, 2.2vw, 1.5rem);
+    width:80%;
+    text-align: center;
+    line-height: 1;
+
+    opacity: 0;
+    animation: textAppear 1.8s ease forwards;
+    animation-delay: 2.2s;
+}
+
+@keyframes textAppear{
+    to{
+        opacity: 1;
+    }
+}
+
+.gridContainer{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+.bingo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    overflow: hidden;
+    bottom: 43.5%;
+    left: 33.2%;
+    border-radius: 50%;
+    width: 13.7px;
+    height: 6px;
+    background-color: #9692c4;
+    cursor: pointer;
+    
+    transition: width 2.6s cubic-bezier(.68,-0.55,.27,1.55),
+                height 2.6s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+.bingo:hover{
+    transform: scale(3.7);
+}
+
+
+.links{
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: opacity 1.4s ease 0.3s;
+    
+}
+
+.links img{
+    width: 20vw;
+}
+
+body:has(#reveal:checked){
+    background-color: #9692c483;
+    transition: all 2.8s ease 0.5s;
+    color: #9692c409;
+}
+
+#reveal:checked + .bingo{
+    width: 80vw;
+    height: 92vh;
+    border-radius: 60% 40% 55% 45% / 60% 45% 55% 40%;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#reveal:checked + .bingo .links{
+    opacity: 1;
+}
+
+@media (max-width: 800px){
+    .bingo{
+        width: 7.8px;
+        height: 4px;
+    }
+}
+
+@media (max-width: 550px){
+    
+    #invisibleWhenSmall, br{
+        display: none;
+    }
+
+    .bingo{
+        width: 8px;
+        height: 4px;
+    }
+    .cloud-container img.cloud{
+        width: 100%;          /* cloud scales with container */
+        display: block;
+        position: relative;
+        right: 18%;
+        bottom: 15px;
+    }
+
+    #textContainer{
+        text-align: left;
+
+        margin-top: -0.5rem;
+
+        opacity: 0;
+        animation: textAppear 1.2s ease forwards;
+        animation-delay: 0.1s;
+
+    }
+
+
+    @keyframes textAppear{
+        to{
+        opacity: 1;
+        }
+    }
+
+    #reveal:checked + .bingo{
+    width: 85vw;
+    height: 45vh;
+    border-radius: 60% 40% 55% 45% / 60% 45% 55% 40%;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    }
+    
+}
+
+@media (max-width: 400px){
+        .cloud-container img.cloud{
+            display: none;
+        }
+}
+
